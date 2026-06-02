@@ -200,7 +200,7 @@ aws --endpoint-url=http://localhost:4566 s3 cp application.log s3://app-logs-buc
 
 ---
 
-## Step:-20
+## Step:-10
 
 ### Verify Results
 
