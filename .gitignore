@@ -1,0 +1,4 @@
+node_modules/
+function.zip
+*.log
+result.json
