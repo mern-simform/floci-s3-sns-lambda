@@ -1,6 +1,6 @@
 # Floci + S3 + SNS + Lambda Demo
 
-## Step:-2
+## Step:-1
 
 ### Start Floci Container
 
@@ -20,7 +20,7 @@ docker run --rm -p 4566:4566 \
 
 ```bash
 export AWS_ENDPOINT_URL=http://localhost:4566
-export AWS_DEFAULT_REGION=us-east-2
+export AWS_DEFAULT_REGION=us-east-1
 export AWS_ACCESS_KEY_ID=test
 export AWS_SECRET_ACCESS_KEY=test
 ```
@@ -93,7 +93,7 @@ aws --endpoint-url=http://localhost:4566 sns create-topic --name log-alerts-topi
 
 ```bash
 aws --endpoint-url=http://localhost:4566 sns subscribe \
-  --topic-arn arn:aws:sns:us-east-2:000000000000:log-alerts-topic \
+  --topic-arn arn:aws:sns:us-east-1:000000000000:log-alerts-topic \
   --protocol email \
   --notification-endpoint tandelsanjana8303@gmail.com
 ```
@@ -114,7 +114,7 @@ aws --endpoint-url=http://localhost:4566 lambda create-function \
   --timeout 30 \
   --memory-size 256 \
   --environment Variables="{
-    SNS_TOPIC_ARN=arn:aws:sns:us-east-2:000000000000:log-alerts-topic-2,
+    SNS_TOPIC_ARN=arn:aws:sns:us-east-1:000000000000:log-alerts-topic-2,
     ERROR_THRESHOLD=5,
     OUTPUT_BUCKET=processed-logs-bucket-2,
     APP_NAME=MyApp,
@@ -152,7 +152,7 @@ aws --endpoint-url=http://localhost:4566 s3api put-bucket-notification-configura
   --bucket app-logs-bucket-2 \
   --notification-configuration '{
     "LambdaFunctionConfigurations": [{
-      "LambdaFunctionArn": "arn:aws:lambda:us-east-2:000000000000:function:log-processor-node-2",
+      "LambdaFunctionArn": "arn:aws:lambda:us-east-1:000000000000:function:log-processor-node-2",
       "Events": ["s3:ObjectCreated:*"],
       "Filter": {
         "Key": {
